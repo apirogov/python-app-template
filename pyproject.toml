@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "python-app-template"
+version = "0.1.0"
+description = "A reasonable setup to small up to mid-size projects"
+authors = ["a.pirogov <a.pirogov@fz-juelich.de>"]
+license = "MIT"
+
+# added for PyPI
+readme = "README.md"
+repository = "https://github.com/apirogov/python-app-template"
+homepage = "https://github.com/apirogov/python-app-template"
+documentation = "https://github.com/apirogov/python-app-template"
+keywords = ["awesome", "python", "template"]
+classifiers = [ # see https://pypi.org/classifiers/
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Software Development",
+]
+include = [
+    "LICENSE",
+]
+####
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pdoc = "^8.3.0"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.13.0"
+pytest = "^6.2.4"
+pytest-cov = "^2.12.1"
+pdoc = "^8.3.0"
+tox = "^3.23.1"
+coverage = {extras = ["toml"], version = "^6.2"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# pytest.ini replacement (pytest >= 6.0)
+[tool.pytest.ini_options]
+addopts = "--cov-report=term-missing:skip-covered"
+filterwarnings = ["ignore::DeprecationWarning:somepackage.*"]
+
+# .coveragerc replacement
+[tool.coverage.run]
+source = ['python_app_template']
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+isolated_build = true
+envlist = py37, py38, py39, py310
+
+[testenv]
+whitelist_externals = poetry
+commands =
+    poetry install -v
+    poetry run pytest
+"""

@@ -1,0 +1,24 @@
+# Gitlab Badges
+
+Go to Settings -> General -> Badges
+
+Add following badges:
+
+Name:  Pipeline Status
+Link:  https://jugit.fz-juelich.de/%{project_path}/-/commits/%{default_branch}
+Image: https://jugit.fz-juelich.de/%{project_path}/badges/%{default_branch}/pipeline.svg
+
+Name:  Test Coverage
+Link:  https://jugit.fz-juelich.de/%{project_path}/-/commits/%{default_branch}
+Image: https://jugit.fz-juelich.de/%{project_path}/badges/%{default_branch}/coverage.svg
+
+Name:  Documentation
+Link:  https://jugit.fz-juelich.de/%{project_path}/-/jobs/artifacts/%{default_branch}/download?job=make-docs
+Image: https://jugit.fz-juelich.de/%{project_path}/-/jobs/artifacts/%{default_branch}/raw/docs-badge.svg?job=make-docs
+
+The documentation depends on the make-docs job.
+
+To make coverage badge work correctly (with pytest-cov):
+
+Go to Settings -> CI/CD -> General Pipelines -> Test coverage parsing
+Set the expression to: ^TOTAL.+?(\d+\%)$
