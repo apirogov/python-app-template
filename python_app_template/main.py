@@ -12,10 +12,7 @@ def do_something(x: bool) -> str:
     Returns:
         A string that depends on the argument.
     """
-    if x:
-        return "hello"
-    else:
-        return "world"
+    return "hello" if x else "world"
 
 
 # do_something(5) # should make type error
